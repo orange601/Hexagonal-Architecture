@@ -21,3 +21,8 @@
 어댑터는 외부 세계와 포트 간 교환을 조정하고 역시 인바운드(Inbound)/아웃바운드(Outbound) 어댑터로 구분된다.
 - 인바운드 어댑터 - 외부 애플리케이션/서비스와 내부 비즈니스 영역(인바운드 포트) 간 데이터 교환을 조정
 - 아웃바운드 어댑터 - 내부 비즈니스 영역(아웃바운드 포트)과 외부 애플리케이션/서비스 간 데이터 교환을 조정
+
+
+https://covenant.tistory.com/258
+
+https://github.com/thombergs/buckpal/tree/master/src/main/java/io/reflectoring/buckpal
