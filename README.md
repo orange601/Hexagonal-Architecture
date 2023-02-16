@@ -44,6 +44,4 @@
 
 
 
-https://covenant.tistory.com/258
-
 https://github.com/thombergs/buckpal/tree/master/src/main/java/io/reflectoring/buckpal
