@@ -2,6 +2,7 @@
 - 헥사고날 아키텍처(Hexagonal Architecture), Hexagonal: 육각형
 - 포트 및 어댑터 아키텍처라고도 함
 - [계층형 아키텍처의 문제점](https://github.com/orange601/Layered-Architecture)을 보안하기 위해 탄생
+- 출처: https://covenant.tistory.com/ 
 
 <img src = "https://user-images.githubusercontent.com/24876345/219293566-f9bd82b3-2e08-468e-a91c-3e30fbed9168.png" width="880px">
 
