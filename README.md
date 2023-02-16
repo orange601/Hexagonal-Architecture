@@ -1,5 +1,5 @@
 # Hexagonal-Architecture
-- 헥사고날 아키텍처(Hexagonal Architecture)
+- 헥사고날 아키텍처(Hexagonal Architecture), Hexagonal: 육각형
 - 포트 및 어댑터 아키텍처라고도 함
 - [계층형 아키텍처의 문제점](https://github.com/orange601/Layered-Architecture)을 보안하기 위해 탄생
 
