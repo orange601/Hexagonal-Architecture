@@ -1,6 +1,7 @@
 # Hexagonal-Architecture
 - 헥사고날 아키텍처(Hexagonal Architecture)
 - 포트 및 어댑터 아키텍처라고도 함
+- [계층형 아키텍처의 문제점](https://github.com/orange601/Layered-Architecture)을 보안하기 위해 탄생
 
 ## 헥사고날 아키텍처의 장점 ##
 1. 아키텍처 확장이 용이하다.
