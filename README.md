@@ -44,4 +44,3 @@
 
 
 
-https://github.com/thombergs/buckpal/tree/master/src/main/java/io/reflectoring/buckpal
