@@ -6,6 +6,20 @@
 <img src = "https://user-images.githubusercontent.com/24876345/219286682-25b347b4-b45c-44e5-a70f-d7de3ca7e5b3.png" width="850px">
 
 
+## 구조 ##
+
+### 1. 어댑터(Adapter) ###
+- driving adapter (= incoming adapter)
+    + 애플리케이션 호출
+- driven adapter (= outgoing adapter)
+    + 애플리케이션에 의해 호출
+
+### 2. 포트(Port) ###
+- 인터페이스로 구성
+- 애플리케이션 코어와 어댑터 간에 통신을 위한 부분
+
+### 3. 어플리케이션(Application) ###
+- 도메인 엔티티, 유스케이스
 
 ## 헥사고날 아키텍처의 장점 ##
 1. 아키텍처 확장이 용이하다.
