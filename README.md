@@ -3,7 +3,7 @@
 - 포트 및 어댑터 아키텍처라고도 함
 - [계층형 아키텍처의 문제점](https://github.com/orange601/Layered-Architecture)을 보안하기 위해 탄생
 
-<img src = "https://user-images.githubusercontent.com/24876345/219286682-25b347b4-b45c-44e5-a70f-d7de3ca7e5b3.png" width="350px">
+<img src = "https://user-images.githubusercontent.com/24876345/219286682-25b347b4-b45c-44e5-a70f-d7de3ca7e5b3.png" width="650px">
 
 
 
