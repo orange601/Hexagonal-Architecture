@@ -47,5 +47,5 @@
 5. 더 큰 비즈니스적 가치를 갖고 더 오래 지속되는 도메인 모델에 큰 관심을 둔다.
 
 
-[LINE Engineering 참고](https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture/)
+자세한 내용은 [LINE Engineering](https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture/) 참고
 
