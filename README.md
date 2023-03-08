@@ -54,3 +54,6 @@
 
 자세한 내용은 [LINE Engineering](https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture/) 참고
 
+
+## 구현 ##
+1. 도메인 중심의 아키텍처이므로 도메인 엔티티를 먼저 만든 후에 이를 바탕으로 유스케이스를 구현
