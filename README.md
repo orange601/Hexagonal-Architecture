@@ -63,3 +63,13 @@
 - https://injae7034.github.io/java/wooa_study_04/
 - https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture/
 - https://covenant.tistory.com/258
+
+
+## 단일 책임 원칙 ###
+- 하나의 컴포넌트는 오로지 한 가지 일만 해야 하고, 그것을 올바르게 수행해야 한다. 이는 단일 책임 원칙의 실제 의도는 아니다.
+- 단일 책임 원칙의 실제 정의는 다음과 같다. **컴포넌트를 변경하는 이유는 오직 하나뿐이어야 한다.**
+- 그래서 단일 책임 원칙을 ‘단일 변경 이유 원칙’으로 바꾸는 게 더 자연스러울 수 있다.
+
+
+
+출처: https://injae7034.github.io/java/wooa_study_02/#%EB%8B%A8%EC%9D%BC-%EC%B1%85%EC%9E%84-%EC%9B%90%EC%B9%99
