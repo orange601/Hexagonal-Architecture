@@ -67,6 +67,7 @@
 - 도메인 모델의 현재 상태에 접근한다. (ex. 출금 계좌는 초과 출금되어서는 안 된다. 계좌가 존재해야 한다. )
 - 유스케이스 맥락 속에서 의미적인(semantical) 유효성을 검증
 
+
 ## 풍부한 도메인 모델 vs. 빈약한 도메인 모델 ##
 - 각자 필요에 맞는 방법을 자유롭게 사용하라.
 
@@ -81,3 +82,20 @@
   + 필드, getter, setter
   + 도메인 로직 포함 X → 유스케이스에 구현됨
 - 풍부한 유스케이스 클래스
+
+
+## 유스케이스마다 다른 출력 모델 ##
+- 출력 모델은 각 유스케이스에 맞게 구체적이고 꼭 필요한 데이터만 들고 있어야 한다.
+- 가능한 한 적게 반환하자.
+
+````java
+public boolean deposit(Money money, AccountId sourceAccountId) {
+    Activity deposit = new Activity(null, id, sourceAccountId, id, now(), money);
+    activityWindow.addActivity(deposit);
+
+    return true;
+}
+````
+### 출력 모델을 공유한다면 ###
+1. 유스케이스간의 강한 결합
+2. SRP 위반
