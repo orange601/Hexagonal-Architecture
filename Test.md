@@ -30,3 +30,37 @@
 - given: 인스턴스 생성하고 적절한 상태로 만들기
 - when: 유스케이스의 메서드 호출
 - then: 트랜잭션이 성공적이었는지 확인, 특정 메서드가 호출되었는지 검증
+
+
+## 통합 테스트로 웹 어댑터 테스트 ##
+
+````java
+@WebMvcTest(controllers = {SendMoneyController.class})
+class SendMoneyControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private SendMoneyUseCase sendMoneyUseCase;
+
+    @Test
+    void sendMoney() throws Exception {
+        String sendMoneyUrl = "/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}";
+        long sourceAccountId = 1L;
+        long targetAccountId = 2L;
+        long amount = 500;
+        ResultActions resultActions = mockMvc.perform(
+                post(sendMoneyUrl, sourceAccountId, targetAccountId, amount)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        resultActions.andExpect(status().isOk());
+        then(sendMoneyUseCase).should()
+                .sendMoney(eq(new SendMoneyCommand(
+                        new AccountId(sourceAccountId),
+                        new AccountId(targetAccountId),
+                        Money.of(amount)
+                )));
+    }
+}
+````
