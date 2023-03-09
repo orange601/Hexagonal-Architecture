@@ -64,3 +64,10 @@ class SendMoneyControllerTest {
     }
 }
 ````
+- @WebMvcTest: MockMvc에 관한 설정을 자동으로 수행, 특정 컨트롤러 클래스와 관련 설정들을 스캔한다.
+- MockMvc: 서버 입장에서 구현한 API를 통해 비즈니스 로직이 문제없이 수행되는지 테스트. Servlet Container를 생성하지 않는다.
+- @MockBean: 사용할 서비스 인터페이스를 모킹
+- resultActions.andExpert(): HTTP 응답이 기대한 상태를 반환했는가
+- then()
+    + SendMoneyCommand: 유스케이스에 구문적으로 ㅠ효한 입력인가
+    + 유스케이스가 실제로 호출되었는가
