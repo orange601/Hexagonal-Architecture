@@ -77,3 +77,34 @@ class SendMoneyControllerTest {
 - 웹 컨트롤러는 이 네트워크의 일부로서 동작하는 것이다.
 - 웹 컨트롤러는 스프링 프레임워크와 강하게 결합되어있기 때문에 단위 테스트보다는 프레임워크와 통합된 상태로 테스트하는 것이 합리적이다.
 - 프레임워크를 구성하는 요소들이 프로덕션 환경에서 정상적으로 작동할지 확신할 수 없다.
+
+
+## 통합 테스트로 영속성 어댑터 테스트하기 ##
+- 웹 어댑터를 통합 테스트하는 이유과 마찬가지로 영속성 어댑터도 통합 테스트를 적용한다.
+- 어댑터의 로직만이 아니라 데이터베이스 매핑도 검증
+
+````java
+@DataJpaTest
+@Import({AccountPersistenceAdapter.class, AccountMapper.class})
+class AccountPersistenceAdapterTest {
+    @Autowired
+    private AccountPersistenceAdapter accountPersistenceAdapter;
+
+    @Autowired
+    private ActivityRepository activityRepository;
+
+    @Test
+    @Sql("AccountPersistenceAdapterTest.sql")
+    void loadAccount() {
+        Account account = accountPersistenceAdapter.loadAccount(new AccountId(1L), LocalDateTime.of(2018, 8, 10, 0, 0));
+
+        assertAll(
+                () -> assertThat(account.getActivityWindow().getActivities()).hasSize(2),
+                () -> assertThat(account.calculateBalance()).isEqualTo(Money.of(500))
+        );
+    }
+}
+````
+- @DataJpaTest: 데이터베이스 접근에 필요한 객체 네트워크(spring data repository 포함)를 인스턴스화해야함을 스프링에게 알려준다.
+- @Import: 특정 객체가 이 네트워크에 추가됨을 명확히 표현
+- @Sql("AccountPersistenceAdapterTest.sql"): sql 스크립트로 데이터베이스를 특정 상태로 만든다.
