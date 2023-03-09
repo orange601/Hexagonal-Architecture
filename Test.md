@@ -108,3 +108,62 @@ class AccountPersistenceAdapterTest {
 - @DataJpaTest: 데이터베이스 접근에 필요한 객체 네트워크(spring data repository 포함)를 인스턴스화해야함을 스프링에게 알려준다.
 - @Import: 특정 객체가 이 네트워크에 추가됨을 명확히 표현
 - @Sql("AccountPersistenceAdapterTest.sql"): sql 스크립트로 데이터베이스를 특정 상태로 만든다.
+
+### 데이터베이스를 모킹하지 않는다. ###
+- db를 모킹한다면 코드 수 커버리지는 동일하지만 실제 db와 연동했을 때 SQL 구문 오류나 db 테이블↔ 자바 객체 매핑 에러 등이 발생할 수 있다.
+- 스프링에서는 기본적으로 테스트에서 in-memory database를 사용한다. (설정 필요 X)
+- db마다 고유한 문법이 있기 때문에 실제 db에서 문제가 생길 수 있다.
+- 실제 데이터베이스를 대상으로 진행해야 한다. ( 두 개의 다른 데이터베이스 시스템을 신경 쓸 필요도 없어진다. )
+
+### 시스템 테스트로 주요 경로 테스트하기 ###
+- 전체 애플리케이션 띄우고, API로 요청 보내고, 모든 계층이 잘 작동하는지 검증
+
+````java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class SendMoneySystemTest {
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private LoadAccountPort loadAccountPort;
+
+    private String url;
+
+    @BeforeEach
+    void setUp() {
+        url = "/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}";
+    }
+
+    @Test
+    @Sql("SendMoneySystemTest.sql")
+    void sendMoney() {
+        Money initialSourceBalance = sourceAccount().calculateBalance();
+        Money initialTargetBalance = targetAccount().calculateBalance();
+
+        ResponseEntity response = whenSendMoney(sourceAccountId(), targetAccountId(), transferredAmount());
+
+				then(response.getStatusCode())
+                .isEqualTo(HttpStatus.OK);
+				then(sourceAccount().calculateBalance())
+                .isEqualTo(initialSourceBalance.minus(transferredAmount()));
+				then(targetAccount().calculateBalance())
+                .isEqualTo(initialTargetBalance.plus(transferredAmount()));
+    }
+
+		private ResponseEntity whenSendMoney(AccountId sourceAccountId, AccountId targetAccountId, Money money) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Void> requestEntity = new HttpEntity<>(null, headers);
+
+        return restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                requestEntity,
+                Object.class,
+                sourceAccountId,
+                targetAccountId,
+                money.amount()
+        );
+    }
+}
+````
