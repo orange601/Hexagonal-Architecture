@@ -169,3 +169,11 @@ public class SendMoneySystemTest {
     }
 }
 ````
+
+- @SpringBootTest: Spring이 애플리케이션을 구성하는 모든 객체 네트워크를 띄우게 한다.
+- TestRestTemplate: MockMvc를 사용하지 않음. Servlet Container를 생성해서 프로덕션 환경에 조금 더 가깝게 만들기 위해 실제 HTTP 통신을 한다.
+- LoadAccountPort: 실제 출력 어댑터 이용
+	+ 언제나 서드파티 시스템을 실행해서 테스트할 수 있는 것은 아니기 때문에 모킹을 해야하는데, 육각형 아키텍처는 몇 개의 출력 인터페이스 포트만 모킹하면 되기 때문에 문제를 쉽게 해결할 수 있다.
+- 도메인 특화 언어(domain-specific language, DSL): 헬퍼 메서드들은 여러 가지 상태를 검증할 때 사용할 수 있다.
+	+ 시스템 테스트는 유닛/통합 테스트보다 훨씬 실제 사용자를 잘 흉내내기 때문에 적절한 어휘를 사용한다면 사용자 관점에서 애플리케이션을 검증할 수 있다.
+	+ ex> sourceAccount(), sourceAccountId(), ..
